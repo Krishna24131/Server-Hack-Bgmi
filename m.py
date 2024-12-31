@@ -8,10 +8,10 @@ import datetime
 import os
 
 # insert your Telegram bot token here
-bot = telebot.TeleBot('6985771977:AAHs45lBA9nZ93YsOjhr0LPxjsb6UMctdsg')
+bot = telebot.TeleBot('7777475145:AAFRiMr8FM5G0s4GwlXbYKqYkGQTyC9I8QU')
 
 # Admin user IDs
-admin_id = ["6159360725"]
+admin_id = ["5220882616"]
 
 # File to store allowed user IDs
 USER_FILE = "users.txt"
@@ -363,11 +363,7 @@ def broadcast_message(message):
                         bot.send_message(user_id, message_to_broadcast)
                     except Exception as e:
                         print(f"Failed to send broadcast message to user {user_id}: {str(e)}")
-            response = "Broadcast Message Sent Successfully To All Users."
-        else:
-            response = "Please Provide A Message To Broadcast."
-    else:
-        response = "Only Admin Can Run This Command."
+            response = "Broadcast Message Sent Successfully To All Users.")
 
     bot.reply_to(message, response)
 
