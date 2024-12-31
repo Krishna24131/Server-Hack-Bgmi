@@ -4,7 +4,7 @@
 import telebot
 import subprocess
 import requests
-import datetime
+import datetime 
 import os
 
 # insert your Telegram bot token here
@@ -86,11 +86,11 @@ def record_command_logs(user_id, command, target=None, port=None, time=None):
     with open(LOG_FILE, "a") as file:
         file.write(log_entry + "\n")
 
-@bot.message_handler(commands=['add'])
+@One2manbot(commands=['add'])
 def add_user(message):
     user_id = str(message.chat.id)
     if user_id in admin_id:
-        command = message.text.split()
+        command = message.text.SPL it()
         if len(command) > 1:
             user_to_add = command[1]
             if user_to_add not in allowed_user_ids:
@@ -99,17 +99,10 @@ def add_user(message):
                     file.write(f"{user_to_add}\n")
                 response = f"User {user_to_add} Added Successfully."
             else:
-                response = "User already exists."
-        else:
-            response = "Please specify a user ID to add."
-    else:
-        response = "Only Admin Can Run This Command."
-
+                response = "User already exist"
     bot.reply_to(message, response)
 
-
-
-@bot.message_handler(commands=['remove'])
+@One2manbot(commands=['remove'])
 def remove_user(message):
     user_id = str(message.chat.id)
     if user_id in admin_id:
@@ -127,13 +120,11 @@ def remove_user(message):
         else:
             response = '''Please Specify A User ID to Remove. 
  Usage: /remove <userid>'''
-    else:
-        response = "Only Admin Can Run This Command."
+       
 
     bot.reply_to(message, response)
 
-
-@bot.message_handler(commands=['clearlogs'])
+@One2manbot (commands=['clearlogs'])
 def clear_logs_command(message):
     user_id = str(message.chat.id)
     if user_id in admin_id:
@@ -147,13 +138,9 @@ def clear_logs_command(message):
                     response = "Logs Cleared Successfully"
         except FileNotFoundError:
             response = "Logs are already cleared."
-    else:
-        response = "Only Admin Can Run This Command."
     bot.reply_to(message, response)
 
- 
-
-@bot.message_handler(commands=['allusers'])
+ @One2manbot  (commands=['allusers'])
 def show_all_users(message):
     user_id = str(message.chat.id)
     if user_id in admin_id:
@@ -173,12 +160,8 @@ def show_all_users(message):
                     response = "No data found"
         except FileNotFoundError:
             response = "No data found"
-    else:
-        response = "Only Admin Can Run This Command."
     bot.reply_to(message, response)
-
-
-@bot.message_handler(commands=['logs'])
+@One2manbot(commands=['logs'])
 def show_recent_logs(message):
     user_id = str(message.chat.id)
     if user_id in admin_id:
@@ -193,11 +176,11 @@ def show_recent_logs(message):
             response = "No data found"
             bot.reply_to(message, response)
     else:
-        response = "Only Admin Can Run This Command."
+       
         bot.reply_to(message, response)
 
 
-@bot.message_handler(commands=['id'])
+ @One2manbot(commands=['id'])
 def show_user_id(message):
     user_id = str(message.chat.id)
     response = f"Your ID: {user_id}"
@@ -217,7 +200,7 @@ bgmi_cooldown = {}
 COOLDOWN_TIME =0
 
 # Handler for /bgmi command
-@bot.message_handler(commands=['bgmi'])
+ @One2manbot(commands=['bgmi'])
 def handle_bgmi(message):
     user_id = str(message.chat.id)
     if user_id in allowed_user_ids:
@@ -247,15 +230,14 @@ def handle_bgmi(message):
                 response = f"BGMI Attack Finished. Target: {target} Port: {port} Time: {time}"
         else:
             response = "Usage :- /bgmi <target> <port> <time>\nBy Indian Watchdogs @Indian_Hackers_Team"  # Updated command syntax
-    else:
-        response = "You Are Not Authorized To Use This Command.\nBy Indian Watchdogs @Indian_Hackers_Team"
+   
 
     bot.reply_to(message, response)
 
 
 
 # Add /mylogs command to display logs recorded for bgmi and website commands
-@bot.message_handler(commands=['mylogs'])
+ @One2manbot(commands=['mylogs'])
 def show_command_logs(message):
     user_id = str(message.chat.id)
     if user_id in allowed_user_ids:
@@ -269,13 +251,11 @@ def show_command_logs(message):
                     response = "No Command Logs Found For You."
         except FileNotFoundError:
             response = "No command logs found."
-    else:
-        response = "You Are Not Authorized To Use This Command."
+ 
 
     bot.reply_to(message, response)
 
-
-@bot.message_handler(commands=['help'])
+ @One2manbot(commands=['help'])
 def show_help(message):
     help_text = '''Available commands:
  /bgmi : Method For Bgmi Servers. 
@@ -285,8 +265,6 @@ def show_help(message):
 
  To See Admin Commands:
  /admincmd : Shows All Admin Commands.
- By Indian Watchdogs @Indian_Hackers_Team
-'''
     for handler in bot.message_handlers:
         if hasattr(handler, 'commands'):
             if message.text.startswith('/help'):
@@ -297,14 +275,14 @@ def show_help(message):
                 help_text += f"{handler.commands[0]}: {handler.doc}\n"
     bot.reply_to(message, help_text)
 
-@bot.message_handler(commands=['start'])
+@One2manbot(commands=['start'])
 def welcome_start(message):
     user_name = message.from_user.first_name
     response = f"Welcome to Your Home, {user_name}! Feel Free to Explore.\nTry To Run This Command : /help\nWelcome To The World's Best Ddos Bot\nBy Indian Watchdogs @Indian_Hackers_Team"
     bot.reply_to(message, response)
 
 
-@bot.message_handler(commands=['rules'])
+ @One2manbot(commands=['rules'])
 def welcome_rules(message):
     user_name = message.from_user.first_name
     response = f'''{user_name} Please Follow These Rules:
@@ -315,7 +293,7 @@ def welcome_rules(message):
 By Indian Watchdogs @Indian_Hackers_Team'''
     bot.reply_to(message, response)
 
-@bot.message_handler(commands=['plan'])
+@One2manbot(commands=['plan'])
 def welcome_plan(message):
     user_name = message.from_user.first_name
     response = f'''{user_name}, Brother Only 1 Plan Is Powerfull Then Any Other Ddos !!:
@@ -324,16 +302,10 @@ Vip :
 -> Attack Time : 200 (S)
 > After Attack Limit : 2 Min
 -> Concurrents Attack : 300
-
-Pr-ice List:
-Day-->150 Rs
-Week-->900 Rs
-Month-->1600 Rs
-By Indian Watchdogs @Indian_Hackers_Team
 '''
     bot.reply_to(message, response)
 
-@bot.message_handler(commands=['admincmd'])
+ @One2manbot(commands=['admincmd'])
 def welcome_plan(message):
     user_name = message.from_user.first_name
     response = f'''{user_name}, Admin Commands Are Here!!:
@@ -344,12 +316,11 @@ def welcome_plan(message):
 /logs : All Users Logs.
 /broadcast : Broadcast a Message.
 /clearlogs : Clear The Logs File.
-By Indian Watchdogs @Indian_Hackers_Team
 '''
     bot.reply_to(message, response)
 
 
-@bot.message_handler(commands=['broadcast'])
+@One2manbot(commands=['broadcast'])
 def broadcast_message(message):
     user_id = str(message.chat.id)
     if user_id in admin_id:
@@ -371,4 +342,3 @@ def broadcast_message(message):
 
 
 bot.polling()
-#By Indian Watchdogs @Indian_Hackers_Team
